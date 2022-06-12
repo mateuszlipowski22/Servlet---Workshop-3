@@ -13,6 +13,12 @@
         <element id="directory" name="classes">
           <element id="module-output" name="Servlet---Workshop-3" />
         </element>
+        <element id="directory" name="lib">
+          <element id="library" level="project" name="Maven: javax.servlet:jstl:1.2" />
+          <element id="library" level="project" name="Maven: org.mindrot:jbcrypt:0.4" />
+          <element id="library" level="project" name="Maven: mysql:mysql-connector-java:8.0.20" />
+          <element id="library" level="project" name="Maven: com.google.protobuf:protobuf-java:3.6.1" />
+        </element>
       </element>
       <element id="directory" name="META-INF">
         <element id="file-copy" path="$PROJECT_DIR$/target/Servlets---Workshop-1.0-SNAPSHOT/META-INF/MANIFEST.MF" />
