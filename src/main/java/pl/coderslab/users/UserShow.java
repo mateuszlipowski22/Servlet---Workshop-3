@@ -5,28 +5,19 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-@WebServlet(urlPatterns = "/user/list")
-public class UserList extends HttpServlet {
+@WebServlet(urlPatterns = "/user/show")
+public class UserShow extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        int idShow=Integer.parseInt(req.getParameter("idShow"));
+        UserDAO userDAO = new UserDAO();
 
-        req.setAttribute("showList", "1");
-        doPost(req, resp);
+        req.setAttribute("userShow", userDAO.read(idShow));
 
-
-    }
-
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
-        UserDAO userDao = new UserDAO();
-        req.setAttribute("userList", userDao.findAllArray());
-
+        req.setAttribute("showForm", "1");
         getServletContext().getRequestDispatcher("/users/list.jsp").forward(req, resp);
-
     }
 }

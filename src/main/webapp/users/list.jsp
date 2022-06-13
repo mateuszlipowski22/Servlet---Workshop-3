@@ -77,19 +77,22 @@
                     <c:when test="${addForm=='1'}">
                         <%@include file="add.jsp"%>
                     </c:when>
-                    <c:otherwise>
-                    </c:otherwise>
                 </c:choose>
 
                 <c:choose>
                     <c:when test="${editForm=='1'}">
                         <%@include file="edit.jsp"%>
                     </c:when>
-                    <c:otherwise>
-                    </c:otherwise>
                 </c:choose>
 
+                <c:choose>
+                    <c:when test="${showForm=='1'}">
+                        <%@include file="show.jsp"%>
+                    </c:when>
+                </c:choose>
 
+                <c:choose>
+                    <c:when test="${showList=='1'}">
                 <h2>Users List</h2>
                 <table style="width:100%">
                     <tr>
@@ -103,10 +106,12 @@
                             <td>${user.getId()}</td>
                             <td>${user.getUserName()}</td>
                             <td>${user.getEmail()}</td>
-                            <td><a href="">Delete</a> <a href="/user/edit?idEdit=${user.getId()}">Edit</a> <a href="">Show</a></td>
+                            <td><a href="/user/delete?idDelete=${user.getId()}">Delete</a> <a href="/user/edit?idEdit=${user.getId()}">Edit</a> <a href="/user/show?idShow=${user.getId()}">Show</a></td>
                         </tr>
                 </c:forEach>
                 </table>
+                    </c:when>
+                </c:choose>
 
             </div>
             <!-- /.container-fluid -->

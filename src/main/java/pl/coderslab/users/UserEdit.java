@@ -39,6 +39,7 @@ public class UserEdit extends HttpServlet {
         userDAO.update(user);
 
         req.setAttribute("editForm", 0);
+        req.setAttribute("showList", "1");
         getServletContext().getRequestDispatcher("/user/list").forward(req, resp);
     }
 }

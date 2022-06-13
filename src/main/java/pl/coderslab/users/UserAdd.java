@@ -34,6 +34,7 @@ public class UserAdd extends HttpServlet {
         userDAO.create(user);
 
         req.setAttribute("addForm", 0);
+        req.setAttribute("showList", "1");
         getServletContext().getRequestDispatcher("/user/list").forward(req, resp);
 
     }
