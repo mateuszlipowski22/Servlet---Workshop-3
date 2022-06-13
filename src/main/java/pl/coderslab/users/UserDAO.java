@@ -4,7 +4,9 @@ import org.mindrot.jbcrypt.BCrypt;
 import pl.coderslab.users.User;
 import pl.coderslab.utils.DbUtil;
 
+import java.awt.print.Book;
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.Arrays;
 
 public class UserDAO {
@@ -137,6 +139,29 @@ public class UserDAO {
             e.printStackTrace();
         }
 
+    }
+
+    public ArrayList<User> findAllArray(){
+        String dbSize="SELECT * FROM workshop3.users ORDER BY id;";
+        try (Connection conn = DbUtil.getConnection()) {
+            Statement statement = conn.createStatement();
+            ResultSet rs = statement.executeQuery(dbSize);
+            ArrayList<User> users = new ArrayList<User>();
+            while(rs.next()) {
+                int id = rs.getInt("id");
+                User user = new User();
+                user.setId(id);
+                user.setUserName(rs.getString("username"));
+                user.setEmail(rs.getString("email"));
+                user.setPassword(rs.getString("password"));
+                users.add(user);
+                System.out.println(read(id).toString());
+            }
+            return users;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
 }

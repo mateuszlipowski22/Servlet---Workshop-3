@@ -8,11 +8,11 @@ public class MainDAO {
     public static void main(String[] args) {
 
         UserDAO userDao = new UserDAO();
-        User user = new User();
-        user.setUserName("arek");
-        user.setEmail("arkadiusz.jozwiak@coderslab.pl");
-        user.setPassword("pass");
-        userDao.create(user);
+//        User user = new User();
+//        user.setUserName("arek");
+//        user.setEmail("arkadiusz.jozwiak@coderslab.pl");
+//        user.setPassword("pass");
+//        userDao.create(user);
 
 //        User read = userDao.read(8);
 //        System.out.println(read);
