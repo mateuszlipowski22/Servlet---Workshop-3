@@ -14,7 +14,7 @@
 <body>
 
 <form action="/user/edit" method="post">
-    <label>User Update ${userEdit.getId()}</label><br>
+    <h3 class="m-0 font-weight-bold text-primary">User ID = ${userEdit.getId()} Update</h3>
     <input type="hidden"  name="idEdit" value=${userEdit.getId()}>
     <label>User Name</label><br>
     <input type="text" name="userEditName" value="${userEdit.getUserName()}"><br>
@@ -22,7 +22,7 @@
     <input type="text" name="emailEdit" value="${userEdit.getEmail()}"><br>
     <label>Password</label><br>
     <input type="text" name="passwordEdit"><br>
-    <input type="submit" value="Edit">
+    <button type="submit" class="btn btn-primary">Edit</button>
 </form>
 
 </body>

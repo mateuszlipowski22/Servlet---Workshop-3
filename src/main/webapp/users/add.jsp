@@ -14,14 +14,14 @@
 <body>
 
 <form action="/user/add" method="post">
-    <label>Add user</label><br>
+    <h3 class="m-0 font-weight-bold text-primary">Add user</h3>
     <label>User Name</label><br>
     <input type="text" name="userName"><br>
     <label>Email address</label><br>
     <input type="text" name="email"><br>
     <label>Password</label><br>
     <input type="text" name="password"><br>
-    <input type="submit" value="Save">
+    <button type="submit" class="btn btn-primary">Save</button>
 </form>
 
 </body>

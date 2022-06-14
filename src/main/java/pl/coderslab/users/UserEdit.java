@@ -26,8 +26,8 @@ public class UserEdit extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String userName = req.getParameter("userEditName");
-        String password = req.getParameter("emailEdit");
-        String email = req.getParameter("passwordEdit");
+        String password = req.getParameter("passwordEdit");
+        String email = req.getParameter("emailEdit");
         int idEdit=Integer.parseInt(req.getParameter("idEdit"));
 
         UserDAO userDAO = new UserDAO();

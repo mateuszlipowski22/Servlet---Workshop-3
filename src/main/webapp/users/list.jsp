@@ -31,7 +31,7 @@
     <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
         <!-- Sidebar - Brand -->
-        <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+        <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/user/list">
             <div class="sidebar-brand-icon rotate-n-15">
                 <i class="fas fa-laugh-wink"></i>
             </div>
@@ -42,11 +42,16 @@
         <hr class="sidebar-divider my-0">
 
         <!-- Nav Item - Dashboard -->
-        <li class="nav-item active">
-            <a class="nav-link" href="/user/list">
-                <i class="fas fa-fw fa-tachometer-alt"></i>
-                <span>Generate User List</span></a>
-        </li>
+
+        <c:choose>
+            <c:when test="${loginAuthentication=='1'}">
+                <li class="nav-item active">
+                    <a class="nav-link" href="/user/list">
+                        <i class="fas fa-fw fa-tachometer-alt"></i>
+                        <span>Generate User List</span></a>
+                </li>
+            </c:when>
+        </c:choose>
 
     </ul>
     <!-- End of Sidebar -->
@@ -57,61 +62,113 @@
         <!-- Main Content -->
         <div id="content">
 
+
+
             <!-- Topbar -->
             <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
 
+
+                <ul class="navbar-nav ml-auto">
+
+                    <li class="nav-item dropdown no-arrow mx-1">
+
+                        <div class="d-sm-flex align-items-center justify-content-between mb-4">
+
+                            <c:choose>
+                                <c:when test="${loginAuthentication=='1'}">
+                                    <a href="/logout" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+                                            class="fas fa-download fa-sm text-white-50"></i> Logout </a>
+                                </c:when>
+                                <c:otherwise>
+                                    <a href="/login" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+                                            class="fas fa-download fa-sm text-white-50"></i> Login </a>
+                                </c:otherwise>
+                            </c:choose>
+
+
+
+                        </div>
+
+                    </li>
+
+                </ul>
+
             </nav>
             <!-- End of Topbar -->
+
+
 
             <!-- Begin Page Content -->
             <div class="container-fluid">
 
                 <!-- Page Heading -->
-                <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                    <h1 class="h3 mb-0 text-gray-800">UserCRUD</h1>
-                    <a href="/user/add" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Add new user</a>
-                </div>
+                <c:choose>
+                    <c:when test="${loginAuthentication=='1'}">
+                        <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                            <h1 class="h3 mb-0 text-gray-800">UserCRUD</h1>
+                            <a href="/user/add" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Add new user</a>
+                        </div>
+                    </c:when>
+                </c:choose>
 
 
                 <c:choose>
-                    <c:when test="${addForm=='1'}">
-                        <%@include file="add.jsp"%>
+                    <c:when test="${loginForm=='1'}">
+                        <%@include file="login.jsp"%>
                     </c:when>
                 </c:choose>
 
                 <c:choose>
-                    <c:when test="${editForm=='1'}">
-                        <%@include file="edit.jsp"%>
+                    <c:when test="${incorrectLogin=='1'}">
+                        <h2>Incorrect login / password, please try again</h2>
+                        <%@include file="login.jsp"%>
                     </c:when>
                 </c:choose>
 
-                <c:choose>
-                    <c:when test="${showForm=='1'}">
-                        <%@include file="show.jsp"%>
-                    </c:when>
-                </c:choose>
+            <c:choose>
+                <c:when test="${loginAuthentication=='1'}">
 
-                <c:choose>
-                    <c:when test="${showList=='1'}">
-                <h2>Users List</h2>
-                <table style="width:100%">
-                    <tr>
-                        <th>Id</th>
-                        <th>User Name</th>
-                        <th>Email</th>
-                        <th>Actions</th>
-                    </tr>
-                    <c:forEach items="${userList}" var="user">
+                    <c:choose>
+                        <c:when test="${addForm=='1'}">
+                            <%@include file="add.jsp"%>
+                        </c:when>
+                    </c:choose>
+
+                    <c:choose>
+                        <c:when test="${editForm=='1'}">
+                            <%@include file="edit.jsp"%>
+                        </c:when>
+                    </c:choose>
+
+                    <c:choose>
+                        <c:when test="${showForm=='1'}">
+                            <%@include file="show.jsp"%>
+                        </c:when>
+                    </c:choose>
+
+                    <c:choose>
+                        <c:when test="${showList=='1'}">
+                    <h3 class="m-0 font-weight-bold text-primary">Users List</h3>
+                    <table style="width:100%" class="table">
                         <tr>
-                            <td>${user.getId()}</td>
-                            <td>${user.getUserName()}</td>
-                            <td>${user.getEmail()}</td>
-                            <td><a href="/user/delete?idDelete=${user.getId()}">Delete</a> <a href="/user/edit?idEdit=${user.getId()}">Edit</a> <a href="/user/show?idShow=${user.getId()}">Show</a></td>
+                            <th>Id</th>
+                            <th>User Name</th>
+                            <th>Email</th>
+                            <th>Actions</th>
                         </tr>
-                </c:forEach>
-                </table>
-                    </c:when>
-                </c:choose>
+                        <c:forEach items="${userList}" var="user">
+                            <tr>
+                                <td>${user.getId()}</td>
+                                <td>${user.getUserName()}</td>
+                                <td>${user.getEmail()}</td>
+                                <td><a href="/user/delete?idDelete=${user.getId()}">Delete</a> <a href="/user/edit?idEdit=${user.getId()}">Edit</a> <a href="/user/show?idShow=${user.getId()}">Show</a></td>
+                            </tr>
+                    </c:forEach>
+                    </table>
+                        </c:when>
+                    </c:choose>
+                </c:when>
+            </c:choose>
 
             </div>
             <!-- /.container-fluid -->

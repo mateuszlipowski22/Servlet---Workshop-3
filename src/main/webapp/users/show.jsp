@@ -13,9 +13,8 @@
     <title>Show</title>
 </head>
 <body>
-
-<h2>User Details</h2>
-<table style="width:100%">
+<h3 class="m-0 font-weight-bold text-primary">User Details</h3>
+<table style="width:100%" class="table">
   <tr>
     <td>Id</td>
     <td>${userShow.getId()}</td>
