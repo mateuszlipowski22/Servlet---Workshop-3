@@ -12,18 +12,19 @@
     <title>Edit User</title>
 </head>
 <body>
-
-<form action="/user/edit" method="post">
-    <h3 class="m-0 font-weight-bold text-primary">User ID = ${userEdit.getId()} Update</h3>
+<div class="card-body">
+<form action="/user/edit" method="post" class="form-group">
+    <h3 class="m-0 font-weight-bold text-primary">User ID = ${userEdit.getId()} Update</h3><br>
     <input type="hidden"  name="idEdit" value=${userEdit.getId()}>
     <label>User Name</label><br>
-    <input type="text" name="userEditName" value="${userEdit.getUserName()}"><br>
+    <input type="text" name="userEditName" value="${userEdit.getUserName()}" class="form-control"><br>
     <label>Email address</label><br>
-    <input type="text" name="emailEdit" value="${userEdit.getEmail()}"><br>
+    <input type="text" name="emailEdit" value="${userEdit.getEmail()}" class="form-control"><br>
     <label>Password</label><br>
-    <input type="text" name="passwordEdit"><br>
+    <input type="text" name="passwordEdit" class="form-control"><br>
     <button type="submit" class="btn btn-primary">Edit</button>
 </form>
+</div>
 
 </body>
 </html>

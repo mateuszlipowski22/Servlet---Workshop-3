@@ -72,7 +72,6 @@
 
                     <li class="nav-item dropdown no-arrow mx-1">
 
-                        <div class="d-sm-flex align-items-center justify-content-between mb-4">
 
                             <c:choose>
                                 <c:when test="${loginAuthentication=='1'}">
@@ -85,9 +84,6 @@
                                 </c:otherwise>
                             </c:choose>
 
-
-
-                        </div>
 
                     </li>
 
@@ -120,7 +116,7 @@
 
                 <c:choose>
                     <c:when test="${incorrectLogin=='1'}">
-                        <h2>Incorrect login / password, please try again</h2>
+                        <h3 class="m-0 font-weight-bold text-primary">Incorrect login / password, please try again</h3><br>
                         <%@include file="login.jsp"%>
                     </c:when>
                 </c:choose>

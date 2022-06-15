@@ -17,7 +17,9 @@ public class AuthFilter implements Filter {
 
         if(session.getAttribute("username").equals("admin")){
             request.setAttribute("loginAuthentication", "1");
-        }else {
+        }else if(session.getAttribute("username").equals("user")){
+            request.setAttribute("loginAuthentication", "1");
+        }else{
             request.setAttribute("incorrectLogin", "1");
         }
 

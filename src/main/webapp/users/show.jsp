@@ -13,7 +13,7 @@
     <title>Show</title>
 </head>
 <body>
-<h3 class="m-0 font-weight-bold text-primary">User Details</h3>
+<h3 class="m-0 font-weight-bold text-primary">User Details</h3><br>
 <table style="width:100%" class="table">
   <tr>
     <td>Id</td>

@@ -6,7 +6,7 @@ USE workshop3;
 CREATE TABLE users(
                       id INT(11) NOT NULL AUTO_INCREMENT,
                       email VARCHAR(255) NOT NULL UNIQUE,
-                      username VARCHAR(255) NOT NULL,
+                      username VARCHAR(255) NOT NULL UNIQUE,
                       password VARCHAR(60) NOT NULL,
                       PRIMARY KEY (id)
 );
@@ -17,3 +17,5 @@ SELECT COUNT(id) as size FROM users;
 
 DROP TABLE users;
 DELETE FROM users;
+
+SELECT password FROM workshop3.users WHERE username='Mateusz'

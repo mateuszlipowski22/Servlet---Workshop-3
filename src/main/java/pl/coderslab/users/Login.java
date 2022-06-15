@@ -27,6 +27,9 @@ public class Login extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String user = req.getParameter("username");
         String pass = req.getParameter("password");
+
+        UserDAO userDAO = new UserDAO();
+
         if (user.equals(USER) && pass.equals(PASSWORD)) {
 
             HttpSession session = req.getSession();
@@ -34,7 +37,14 @@ public class Login extends HttpServlet {
             req.setAttribute("loginAuthentication", "1");
             getServletContext().getRequestDispatcher("/users/list.jsp").forward(req, resp);
 
-        } else {
+        } else if(userDAO.isPasswordValid(user, pass)){
+
+            HttpSession session = req.getSession();
+            session.setAttribute("username","user");
+            req.setAttribute("loginAuthentication", "1");
+            getServletContext().getRequestDispatcher("/users/list.jsp").forward(req, resp);
+
+        }else{
             req.setAttribute("incorrectLogin", "1");
             getServletContext().getRequestDispatcher("/users/list.jsp").forward(req, resp);
         }

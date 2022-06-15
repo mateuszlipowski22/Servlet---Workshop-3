@@ -12,17 +12,18 @@
     <title>Add User</title>
 </head>
 <body>
-
-<form action="/user/add" method="post">
-    <h3 class="m-0 font-weight-bold text-primary">Add user</h3>
-    <label>User Name</label><br>
-    <input type="text" name="userName"><br>
-    <label>Email address</label><br>
-    <input type="text" name="email"><br>
-    <label>Password</label><br>
-    <input type="text" name="password"><br>
-    <button type="submit" class="btn btn-primary">Save</button>
-</form>
+<div class="card-body">
+    <form action="/user/add" method="post" class="form-group">
+        <h3 class="m-0 font-weight-bold text-primary">Add user</h3>
+        <label>User Name</label><br>
+        <input type="text" name="userName" class="form-control"><br>
+        <label>Email address</label><br>
+        <input type="text" name="email" class="form-control"><br>
+        <label>Password</label><br>
+        <input type="text" name="password" class="form-control"><br>
+        <button type="submit" class="btn btn-primary">Save</button>
+    </form>
+</div>
 
 </body>
 </html>

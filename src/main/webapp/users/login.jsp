@@ -11,15 +11,16 @@
     <title>Login</title>
 </head>
 <body>
-
-<form action="/login" method="post">
-    <label>Username</label><br>
-    <input type="text"  name="username"/><br>
-    <label>Password</label><br>
-    <input name="password" type="password"/><br>
-    <button type="submit">Login</button><br>
-</form>
-
+<div class="card-body">
+    <form action="/login" method="post" class="form-group">
+        <label>Username</label><br>
+        <input type="text" name="username" class="form-control"/><br>
+        <label>Password</label><br>
+        <input name="password" type="password"class="form-control"/><br>
+        <button type="submit" class="btn btn-primary">Login</button>
+        <br>
+    </form>
+</div>
 
 </body>
 </html>

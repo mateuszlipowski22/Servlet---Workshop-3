@@ -15,6 +15,8 @@ public class UserDAO {
     private static final String SELECT_USER_QUERY = "SELECT username, email, password FROM workshop3.users WHERE id=?;";
     private static final String UPDATE_USER_QUERY = "UPDATE workshop3.users SET username=?, email=?, password=? WHERE id=?;";
     private static final String DELETE_USER_QUERY = "DELETE FROM workshop3.users where id = ?";
+    private static final String SELECT_USER_PASSWORD_QUERY = "SELECT password FROM workshop3.users WHERE username=?;";
+
 
     public User create(User user) {
         try (Connection conn = DbUtil.getConnection()) {
@@ -37,6 +39,25 @@ public class UserDAO {
 
     public String hashPassword(String password) {
         return BCrypt.hashpw(password, BCrypt.gensalt());
+    }
+
+    public boolean isPasswordValid(String username, String password){
+        try (Connection conn = DbUtil.getConnection()) {
+            PreparedStatement statement =
+                    conn.prepareStatement(SELECT_USER_PASSWORD_QUERY);
+            statement.setString(1, username);
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                if(BCrypt.checkpw(password,resultSet.getString("password"))){
+                    return true;
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+
+
     }
 
     public User read(int userId){
