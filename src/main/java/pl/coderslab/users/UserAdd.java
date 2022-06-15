@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Objects;
 
 @WebServlet(urlPatterns = "/user/add")
 public class UserAdd extends HttpServlet {
@@ -27,15 +28,43 @@ public class UserAdd extends HttpServlet {
 
         UserDAO userDAO = new UserDAO();
 
-        User user = new User();
-        user.setUserName(userName);
-        user.setEmail(email);
-        user.setPassword(password);
-        userDAO.create(user);
+        boolean userVerified = true;
 
-        req.setAttribute("addForm", 0);
-        req.setAttribute("showList", "1");
+        if(userName.equals("") || password.equals("") || email.equals("")){
+            req.setAttribute("emptyField", 1);
+            userVerified = false;
+        }
+
+
+        if(!userDAO.verifyEmail(email)) {
+            req.setAttribute("incorrectEmail", 1);
+            userVerified = false;
+        }
+
+        if(!userDAO.isUsernameAvailable(userName)){
+            req.setAttribute("usernameTaken", 1);
+            userVerified = false;
+
+        }
+
+        if(!userDAO.isEmailAvailable(email)) {
+            req.setAttribute("emailTaken", 1);
+            userVerified = false;
+        }
+
+        if(userVerified){
+            User user = new User();
+            user.setUserName(userName);
+            user.setEmail(email);
+            user.setPassword(password);
+            userDAO.create(user);
+
+            req.setAttribute("addForm", 0);
+            req.setAttribute("showList", "1");
+        }else{
+            req.setAttribute("addForm", 1);
+        }
+
         getServletContext().getRequestDispatcher("/user/list").forward(req, resp);
-
     }
 }

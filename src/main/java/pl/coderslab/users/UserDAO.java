@@ -16,6 +16,8 @@ public class UserDAO {
     private static final String UPDATE_USER_QUERY = "UPDATE workshop3.users SET username=?, email=?, password=? WHERE id=?;";
     private static final String DELETE_USER_QUERY = "DELETE FROM workshop3.users where id = ?";
     private static final String SELECT_USER_PASSWORD_QUERY = "SELECT password FROM workshop3.users WHERE username=?;";
+    private static final String SELECT_USERNAME_QUERY = "SELECT username FROM workshop3.users WHERE username=?;";
+    private static final String SELECT_EMAIL_QUERY = "SELECT email FROM workshop3.users WHERE email=?;";
 
 
     public User create(User user) {
@@ -56,8 +58,6 @@ public class UserDAO {
             e.printStackTrace();
         }
         return false;
-
-
     }
 
     public User read(int userId){
@@ -183,6 +183,40 @@ public class UserDAO {
             e.printStackTrace();
             return null;
         }
+    }
+
+    public boolean verifyEmail(String email){
+        return email.matches("[_a-zA-Z0-9-]+(\\.[_a-zA-Z0-9-]+)*@[a-zA-Z0-9-]+(\\.[a-zA-Z0-9-]+)*\\.([a-zA-Z]{2,}){1}");
+    }
+
+    public boolean isEmailAvailable(String username){
+        try (Connection conn = DbUtil.getConnection()) {
+            PreparedStatement statement =
+                    conn.prepareStatement(SELECT_EMAIL_QUERY);
+            statement.setString(1, username);
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                    return false;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return true;
+    }
+
+    public boolean isUsernameAvailable(String email){
+        try (Connection conn = DbUtil.getConnection()) {
+            PreparedStatement statement =
+                    conn.prepareStatement(SELECT_USERNAME_QUERY);
+            statement.setString(1, email);
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                return false;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return true;
     }
 
 }

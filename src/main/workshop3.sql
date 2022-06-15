@@ -18,4 +18,8 @@ SELECT COUNT(id) as size FROM users;
 DROP TABLE users;
 DELETE FROM users;
 
-SELECT password FROM workshop3.users WHERE username='Mateusz'
+SELECT password FROM workshop3.users WHERE username='Mateusz';
+
+SELECT username FROM workshop3.users WHERE username='ma';
+
+SELECT email FROM workshop3.users WHERE email='ja';
