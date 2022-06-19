@@ -31,11 +31,20 @@
     <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
         <!-- Sidebar - Brand -->
-        <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/user/list">
+        <a class="sidebar-brand d-flex align-items-center justify-content-center"
+                <c:choose>
+                    <c:when test="${loginAuthentication=='1'}">
+                        href="/user/list"
+                    </c:when>
+                    <c:when test="${loginAuthentication!='1'}">
+                        href="/login"
+                    </c:when>
+                </c:choose>
+        >
             <div class="sidebar-brand-icon rotate-n-15">
                 <i class="fas fa-laugh-wink"></i>
             </div>
-            <div class="sidebar-brand-text mx-3">SB Admin <sup>2</sup></div>
+            <h3 class="h3 mb-0 text-white-800">User CRUD</h3>
         </a>
 
         <!-- Divider -->
